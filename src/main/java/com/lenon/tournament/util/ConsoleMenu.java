@@ -73,6 +73,21 @@ public class ConsoleMenu {
         String name = in.nextLine().trim();
         System.out.print("Athlete IDs (comma-separated): ");
         String[] ids = in.nextLine().trim().split("\\s*,\\s*");
+
+        // validate IDs
+        boolean allExist = true;
+        for (String id : ids) {
+            if (service.findAthlete(id).isEmpty()) {
+                System.out.println("Error: Athlete ID '" + id + "' not found.");
+                allExist = false;
+            }
+        }
+
+        if (!allExist) {
+            System.out.println("Team not created.");
+            return;
+        }
+
         Team t = service.createTeam(name, ids);
         System.out.println("Team created: " + t);
     }
