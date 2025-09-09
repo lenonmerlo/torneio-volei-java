@@ -35,7 +35,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>com.lenon.torneio.Main</mainClass>
+                            <mainClass>com.lenon.tournament.Main</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
