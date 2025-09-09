@@ -29,6 +29,8 @@ public class ConsoleMenu {
             System.out.println("6) Show ranking");
             System.out.println("7) Enqueue substitute");
             System.out.println("8) Call substitute");
+            System.out.println("9) List athletes");
+            System.out.println("10) List teams");
             System.out.println("0) Exit");
             System.out.print("Option: ");
             op = readInt();
@@ -43,6 +45,8 @@ public class ConsoleMenu {
                     case 6 -> showRanking();
                     case 7 -> enqueueSubstitute();
                     case 8 -> callSubstitute();
+                    case 9 -> listAthletes();
+                    case 10 -> listTeams();
                     case 0 -> System.out.println("Bye!");
                     default -> System.out.println("Invalid option.");
                 }
@@ -131,6 +135,26 @@ public class ConsoleMenu {
     private void callSubstitute() {
         var sub = service.callSubstitute();
         System.out.println(sub.map(a -> "Substitute: " + a).orElse("Waitlist is empty."));
+    }
+
+    private void listAthletes() {
+        var athletes = service.listAthletes();
+        if (athletes.isEmpty()) {
+            System.out.println("No athletes registered.");
+            return;
+        }
+        System.out.println("=== Athletes ===");
+        athletes.forEach(a -> System.out.println("- " + a));
+    }
+
+    private void listTeams() {
+        var teams = service.listTeams();
+        if (teams.isEmpty()) {
+            System.out.println("No teams created.");
+            return;
+        }
+        System.out.println("=== Teams ===");
+        teams.forEach(t -> System.out.println("- " + t));
     }
 
     private int readInt() {
